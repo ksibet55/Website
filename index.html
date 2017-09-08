@@ -201,9 +201,6 @@ sqldf(query)</code></pre>
 ## 34  mayswi01    NY1   1955 51
 ## 35 fieldce01    DET   1990 51
 ## 36 jonesan01    ATL   2005 51</code></pre>
-</div>
-<div id="section" class="section level1">
-<h1>————————————————</h1>
 <p>Find all instances where Yankees have hit 40 homeruns or more</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,HR FROM Batting
 WHERE teamID='NYA' and HR&gt;=40&quot;
@@ -240,9 +237,6 @@ sqldf(query)</code></pre>
 ## 28 rodrial01   2007 54
 ## 29 grandcu01   2011 41
 ## 30 grandcu01   2012 43</code></pre>
-</div>
-<div id="section-1" class="section level1">
-<h1>————————————————-</h1>
 <p>Find all instances where a player had more than 40 homeruns but less than 60 strikeouts</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR,SO FROM Batting 
 WHERE HR&gt;40 and SO&lt;60&quot;
@@ -277,9 +271,6 @@ sqldf(query)</code></pre>
 ## 26 bondsba01    SFN   2004 45 41
 ## 27 pujolal01    SLN   2004 46 52
 ## 28 pujolal01    SLN   2006 49 50</code></pre>
-</div>
-<div id="section-2" class="section level1">
-<h1>————————————————-</h1>
 <p>Find all instances of Phillies in the 1970’s hitting more than 30 homeruns</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting
 WHERE teamID='PHI' and HR&gt;30 and yearID&lt;=1979 and yearID&gt;=1970&quot;
@@ -295,6 +286,7 @@ sqldf(query)</code></pre>
 ## 7 schmimi01    PHI   1977 38
 ## 8 luzingr01    PHI   1978 35
 ## 9 schmimi01    PHI   1979 45</code></pre>
+<pre class="r"><code>library(Lahman)</code></pre>
 </div>
 
 

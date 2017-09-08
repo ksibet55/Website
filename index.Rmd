@@ -34,7 +34,6 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 
-#------------------------------------------------
 
 Find all instances where Yankees have hit 40 homeruns or more
 
@@ -47,7 +46,6 @@ sqldf(query)
 ```
 
 
-#-------------------------------------------------
 
 Find all instances where a player had more than 40 homeruns but less than 60 strikeouts
 
@@ -59,7 +57,6 @@ sqldf(query)
 ```
 
 
-#-------------------------------------------------
 
 Find all instances of Phillies in the 1970's hitting more than 30 homeruns
 
@@ -70,4 +67,7 @@ WHERE teamID='PHI' and HR>30 and yearID<=1979 and yearID>=1970"
 sqldf(query)
 ```
 
+```{r}
+library(Lahman)
+```
 
