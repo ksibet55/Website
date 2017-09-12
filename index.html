@@ -155,6 +155,92 @@ sqldf(query)</code></pre>
 ## 23 shockur01   1927    NYA  0
 ## 24 thomamy01   1927    NYA  0
 ## 25  weraju01   1927    NYA  1</code></pre>
+<div id="examples" class="section level3">
+<h3>Examples</h3>
+<p>Find all instances where the Yankees have hit 40 homeruns or more</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,HR FROM Batting
+WHERE teamID='NYA' and HR&gt;=40&quot;
+sqldf(query)</code></pre>
+<pre><code>##     playerID yearID HR
+## 1   ruthba01   1920 54
+## 2   ruthba01   1921 59
+## 3   ruthba01   1923 41
+## 4   ruthba01   1924 46
+## 5   ruthba01   1926 47
+## 6  gehrilo01   1927 47
+## 7   ruthba01   1927 60
+## 8   ruthba01   1928 54
+## 9   ruthba01   1929 46
+## 10 gehrilo01   1930 41
+## 11  ruthba01   1930 49
+## 12 gehrilo01   1931 46
+## 13  ruthba01   1931 46
+## 14  ruthba01   1932 41
+## 15 gehrilo01   1934 49
+## 16 gehrilo01   1936 49
+## 17 dimagjo01   1937 46
+## 18 mantlmi01   1956 52
+## 19 mantlmi01   1958 42
+## 20 mantlmi01   1960 40
+## 21 mantlmi01   1961 54
+## 22 marisro01   1961 61
+## 23 jacksre01   1980 41
+## 24 martiti02   1997 44
+## 25 giambja01   2002 41
+## 26 giambja01   2003 41
+## 27 rodrial01   2005 48
+## 28 rodrial01   2007 54
+## 29 grandcu01   2011 41
+## 30 grandcu01   2012 43</code></pre>
+<p>Find all instances where a player had more than 40 homeruns, but less than 60 strikeouts</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR,SO FROM Batting
+WHERE HR&gt;40 and SO&lt;60&quot;
+sqldf(query)</code></pre>
+<pre><code>##     playerID teamID yearID HR SO
+## 1  hornsro01    SLN   1922 42 50
+## 2  willicy01    PHI   1923 41 57
+## 3    ottme01    NY1   1929 42 38
+## 4  gehrilo01    NYA   1931 46 56
+## 5   ruthba01    NYA   1931 46 51
+## 6  gehrilo01    NYA   1934 49 31
+## 7  gehrilo01    NYA   1936 49 46
+## 8  troskha01    CLE   1936 42 58
+## 9  dimagjo01    NYA   1937 46 37
+## 10  mizejo01    SLN   1940 43 49
+## 11  mizejo01    NY1   1947 51 42
+## 12 willite01    BOS   1949 43 48
+## 13 kinerra01    PIT   1951 42 57
+## 14 camparo01    BRO   1953 41 58
+## 15 rosenal01    CLE   1953 43 48
+## 16 kluszte01    CIN   1954 49 35
+## 17  mayswi01    NY1   1954 41 57
+## 18 kluszte01    CIN   1955 47 40
+## 19 aaronha01    ML1   1957 44 58
+## 20 sievero01    WS1   1957 42 55
+## 21 aaronha01    ATL   1969 44 47
+## 22 aaronha01    ATL   1971 47 58
+## 23 thomafr04    CHA   1993 41 54
+## 24 bondsba01    SFN   2002 46 47
+## 25 bondsba01    SFN   2003 45 58
+## 26 bondsba01    SFN   2004 45 41
+## 27 pujolal01    SLN   2004 46 52
+## 28 pujolal01    SLN   2006 49 50</code></pre>
+<p>Find all instances of Phillies in the 1970’s hitting more than 30 homeruns</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting
+WHERE teamID='PHI' and HR&gt;30 
+and yearID&lt;=1979 and yearID&gt;=1970&quot;
+sqldf(query)</code></pre>
+<pre><code>##    playerID teamID yearID HR
+## 1 johnsde01    PHI   1971 34
+## 2 schmimi01    PHI   1974 36
+## 3 luzingr01    PHI   1975 34
+## 4 schmimi01    PHI   1975 38
+## 5 schmimi01    PHI   1976 38
+## 6 luzingr01    PHI   1977 39
+## 7 schmimi01    PHI   1977 38
+## 8 luzingr01    PHI   1978 35
+## 9 schmimi01    PHI   1979 45</code></pre>
+</div>
 </div>
 <div id="order-by" class="section level2">
 <h2>Order By</h2>
@@ -201,92 +287,170 @@ sqldf(query)</code></pre>
 ## 34  mayswi01    NY1   1955 51
 ## 35 fieldce01    DET   1990 51
 ## 36 jonesan01    ATL   2005 51</code></pre>
-<p>Find all instances where Yankees have hit 40 homeruns or more</p>
-<pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,HR FROM Batting
-WHERE teamID='NYA' and HR&gt;=40&quot;
-
-sqldf(query)</code></pre>
-<pre><code>##     playerID yearID HR
-## 1   ruthba01   1920 54
-## 2   ruthba01   1921 59
-## 3   ruthba01   1923 41
-## 4   ruthba01   1924 46
-## 5   ruthba01   1926 47
-## 6  gehrilo01   1927 47
-## 7   ruthba01   1927 60
-## 8   ruthba01   1928 54
-## 9   ruthba01   1929 46
-## 10 gehrilo01   1930 41
-## 11  ruthba01   1930 49
-## 12 gehrilo01   1931 46
-## 13  ruthba01   1931 46
-## 14  ruthba01   1932 41
-## 15 gehrilo01   1934 49
-## 16 gehrilo01   1936 49
-## 17 dimagjo01   1937 46
-## 18 mantlmi01   1956 52
-## 19 mantlmi01   1958 42
-## 20 mantlmi01   1960 40
-## 21 mantlmi01   1961 54
-## 22 marisro01   1961 61
-## 23 jacksre01   1980 41
-## 24 martiti02   1997 44
-## 25 giambja01   2002 41
-## 26 giambja01   2003 41
-## 27 rodrial01   2005 48
-## 28 rodrial01   2007 54
-## 29 grandcu01   2011 41
-## 30 grandcu01   2012 43</code></pre>
-<p>Find all instances where a player had more than 40 homeruns but less than 60 strikeouts</p>
-<pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR,SO FROM Batting 
-WHERE HR&gt;40 and SO&lt;60&quot;
-
-sqldf(query)</code></pre>
-<pre><code>##     playerID teamID yearID HR SO
-## 1  hornsro01    SLN   1922 42 50
-## 2  willicy01    PHI   1923 41 57
-## 3    ottme01    NY1   1929 42 38
-## 4  gehrilo01    NYA   1931 46 56
-## 5   ruthba01    NYA   1931 46 51
-## 6  gehrilo01    NYA   1934 49 31
-## 7  gehrilo01    NYA   1936 49 46
-## 8  troskha01    CLE   1936 42 58
-## 9  dimagjo01    NYA   1937 46 37
-## 10  mizejo01    SLN   1940 43 49
-## 11  mizejo01    NY1   1947 51 42
-## 12 willite01    BOS   1949 43 48
-## 13 kinerra01    PIT   1951 42 57
-## 14 camparo01    BRO   1953 41 58
-## 15 rosenal01    CLE   1953 43 48
-## 16 kluszte01    CIN   1954 49 35
-## 17  mayswi01    NY1   1954 41 57
-## 18 kluszte01    CIN   1955 47 40
-## 19 aaronha01    ML1   1957 44 58
-## 20 sievero01    WS1   1957 42 55
-## 21 aaronha01    ATL   1969 44 47
-## 22 aaronha01    ATL   1971 47 58
-## 23 thomafr04    CHA   1993 41 54
-## 24 bondsba01    SFN   2002 46 47
-## 25 bondsba01    SFN   2003 45 58
-## 26 bondsba01    SFN   2004 45 41
-## 27 pujolal01    SLN   2004 46 52
-## 28 pujolal01    SLN   2006 49 50</code></pre>
-<p>Find all instances of Phillies in the 1970’s hitting more than 30 homeruns</p>
+<div id="examples-1" class="section level3">
+<h3>Examples</h3>
+<p>Find every instance of a player hitting more than 50 homeruns in order of highest to lowest homerun total</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting
-WHERE teamID='PHI' and HR&gt;30 and yearID&lt;=1979 and yearID&gt;=1970&quot;
-
+WHERE HR&gt;50
+ORDER BY HR DESC&quot;
 sqldf(query)</code></pre>
-<pre><code>##    playerID teamID yearID HR
-## 1 johnsde01    PHI   1971 34
-## 2 schmimi01    PHI   1974 36
-## 3 luzingr01    PHI   1975 34
-## 4 schmimi01    PHI   1975 38
-## 5 schmimi01    PHI   1976 38
-## 6 luzingr01    PHI   1977 39
-## 7 schmimi01    PHI   1977 38
-## 8 luzingr01    PHI   1978 35
-## 9 schmimi01    PHI   1979 45</code></pre>
-<pre class="r"><code>library(Lahman)</code></pre>
+<pre><code>##     playerID teamID yearID HR
+## 1  bondsba01    SFN   2001 73
+## 2  mcgwima01    SLN   1998 70
+## 3   sosasa01    CHN   1998 66
+## 4  mcgwima01    SLN   1999 65
+## 5   sosasa01    CHN   2001 64
+## 6   sosasa01    CHN   1999 63
+## 7  marisro01    NYA   1961 61
+## 8   ruthba01    NYA   1927 60
+## 9   ruthba01    NYA   1921 59
+## 10  foxxji01    PHA   1932 58
+## 11 greenha01    DET   1938 58
+## 12 howarry01    PHI   2006 58
+## 13 gonzalu01    ARI   2001 57
+## 14 rodrial01    TEX   2002 57
+## 15 wilsoha01    CHN   1930 56
+## 16 griffke02    SEA   1997 56
+## 17 griffke02    SEA   1998 56
+## 18  ruthba01    NYA   1920 54
+## 19  ruthba01    NYA   1928 54
+## 20 kinerra01    PIT   1949 54
+## 21 mantlmi01    NYA   1961 54
+## 22 ortizda01    BOS   2006 54
+## 23 rodrial01    NYA   2007 54
+## 24 bautijo02    TOR   2010 54
+## 25 davisch02    BAL   2013 53
+## 26 mantlmi01    NYA   1956 52
+## 27  mayswi01    SFN   1965 52
+## 28 fostege01    CIN   1977 52
+## 29 mcgwima01    OAK   1996 52
+## 30 rodrial01    TEX   2001 52
+## 31 thomeji01    CLE   2002 52
+## 32 kinerra01    PIT   1947 51
+## 33  mizejo01    NY1   1947 51
+## 34  mayswi01    NY1   1955 51
+## 35 fieldce01    DET   1990 51
+## 36 jonesan01    ATL   2005 51</code></pre>
+<p>Find all instances os a player striking out less than 10 times. Make sure each player has had at least 400 at-bats. Order by having least strikeouts at the top.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,AB,SO FROM Batting
+WHERE SO&lt;10 and AB&gt;=400
+ORDER BY SO&quot;
+sqldf(query)</code></pre>
+<pre><code>##     playerID teamID yearID  AB SO
+## 1  doyleja01    NY1   1894 422  3
+## 2  seweljo01    NYA   1932 503  3
+## 3  seweljo01    CLE   1925 608  4
+## 4  seweljo01    CLE   1929 578  4
+## 5  seweljo01    NYA   1933 524  4
+## 6   wardjo01    NY1   1893 588  5
+## 7  holloch01    CHN   1922 592  5
+## 8  mcinnst01    CLE   1922 537  5
+## 9  wanerll01    PIT   1936 414  5
+## 10 wrighge01    BS1   1875 408  6
+## 11 broutda01    BSN   1889 485  6
+## 12 keelewi01    BLN   1894 590  6
+## 13  wardjo01    NY1   1894 540  6
+## 14 quinnjo02    SLN   1895 543  6
+## 15 mcinnst01    BSN   1924 581  6
+## 16 seweljo01    CLE   1926 578  6
+## 17  wardjo01    NY1   1889 479  7
+## 18 crossla01    PHI   1893 415  7
+## 19 quinnjo02    SLN   1893 547  7
+## 20 crossla01    PHI   1894 529  7
+## 21 vaughfa01    CIN   1896 433  7
+## 22 cochrmi01    PHA   1927 432  7
+## 23 seweljo01    CLE   1927 569  7
+## 24 traynpi01    PIT   1929 540  7
+## 25 muelldo01    NY1   1956 453  7
+## 26 connoro01    NY1   1885 455  8
+## 27 glassja01    IN3   1887 483  8
+## 28 glassja01    NY1   1890 512  8
+## 29 donovpa01    PIT   1893 499  8
+## 30 dungasa01    CHN   1893 465  8
+## 31 pinknge01    LS3   1893 446  8
+## 32 brodist01    BLN   1894 573  8
+## 33 quinnjo02    SLN   1894 405  8
+## 34 bierblo01    PIT   1895 466  8
+## 35 crossla01    PHI   1895 535  8
+## 36   hoydu01    CIN   1895 429  8
+## 37 roushed01    CIN   1921 418  8
+## 38 collied01    CHA   1923 505  8
+## 39 collied01    CHA   1925 425  8
+## 40 speaktr01    WS1   1927 523  8
+## 41 cochrmi01    PHA   1929 514  8
+## 42 seweljo01    NYA   1931 484  8
+## 43 wanerll01    PIT   1933 500  8
+## 44 verbaem01    PHI   1947 540  8
+## 45 ansonca01    CHN   1883 413  9
+## 46 broutda01    DTN   1887 500  9
+## 47   hoydu01    WAS   1893 564  9
+## 48 bierblo01    PIT   1894 525  9
+## 49 broutda01    BLN   1894 525  9
+## 50 milledo01    SLN   1894 481  9
+## 51 keelewi01    BLN   1896 544  9
+## 52 mckeaed01    CL4   1896 571  9
+## 53 speaktr01    CLE   1918 471  9
+## 54  dealch01    CHN   1921 422  9
+## 55 mcinnst01    BOS   1921 584  9
+## 56 severha01    SLA   1921 472  9
+## 57  highan01    BSN   1926 476  9
+## 58 summaho01    CLE   1926 581  9
+## 59 seweljo01    CLE   1928 588  9
+## 60  ricesa01    WS1   1929 616  9
+## 61 leachfr01    NY1   1931 515  9
+## 62 busched01    PHA   1945 416  9
+## 63 holmeto01    BSN   1945 636  9
+## 64 boudrlo01    CLE   1948 560  9
+## 65 mitchda01    CLE   1952 511  9</code></pre>
+</div>
+</div>
+<div id="aggregation" class="section level1">
+<h1>Aggregation</h1>
+<div id="examples-2" class="section level3">
+<h3>Examples</h3>
+<p>Compress Babe Ruth’s career homerun total into one line</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,sum(HR) FROM Batting
+WHERE playerID='ruthba01'
+GROUP BY playerID&quot;
+sqldf(query)</code></pre>
+<pre><code>##   playerID sum(HR)
+## 1 ruthba01     714</code></pre>
+<p>Find the career homerun totals for all players, but limit the output to totals 600 or more. Order by career total.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,sum(HR) FROM Batting
+GROUP BY playerID
+HAVING sum(HR)&gt;=600
+ORDER BY sum(HR) DESC&quot;
+sqldf(query)</code></pre>
+<pre><code>##    playerID sum(HR)
+## 1 bondsba01     762
+## 2 aaronha01     755
+## 3  ruthba01     714
+## 4 rodrial01     696
+## 5  mayswi01     660
+## 6 griffke02     630
+## 7 thomeji01     612
+## 8  sosasa01     609</code></pre>
+<p>Find the players who have averaged more than 30 homeruns per year throughout their career. Order by having highest average at the top.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,avg(HR) FROM Batting
+GROUP BY playerID
+HAVING avg(HR)&gt;30
+ORDER BY avg(HR) DESC&quot;
+sqldf(query)</code></pre>
+<pre><code>##     playerID  avg(HR)
+## 1  pujolal01 36.93750
+## 2  bondsba01 34.63636
+## 3  mcgwima01 34.29412
+## 4  kinerra01 33.54545
+## 5  aaronha01 32.82609
+## 6  bryankr01 32.50000
+## 7   ruthba01 32.45455
+## 8   sosasa01 32.05263
+## 9  cabremi01 31.85714
+## 10 belleal01 31.75000
+## 11 rodrial01 31.63636
+## 12 schmimi01 30.44444
+## 13 abreujo02 30.33333</code></pre>
+</div>
 </div>
 
 
