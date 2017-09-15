@@ -87,7 +87,9 @@ sqldf(query)
 ```
 
 
-#Aggregation
+##Aggregation
+
+Using aggregation one can compress multiple rows of data into one, allowing the data to be easily read. Some common Aggregation commands are sum(), avg(), max(), and min().
 
 ###Examples
 
@@ -123,9 +125,9 @@ sqldf(query)
 
 ```
 
-#Joins
+##Joins
 
-Joins allows users to use two tables under Lahman at once using the comman INNER JOIN.
+Joins allows users to use multiple tables under Lahman at once using the comman INNER JOIN. We have used the Batting, Master, and Salaries tables in the following examples. 
 
 ###Examples
 
@@ -161,4 +163,41 @@ WHERE playerID='ruthba01'"
 sqldf(query)
 ```
 
+4. Babe Ruth- first and last name, yearID, HR
+
+```{r}
+query<-"SELECT nameFirst,nameLast,name,Batting.yearID,Batting.HR
+FROM(Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID) INNER JOIN Teams
+ON Batting.teamID=Teams.teamID AND Batting.yearID=Teams.yearID
+WHERE Batting.playerID='ruthba01'"
+sqldf(query)
+```
+
+5. Let's get the career homerun totals for players. Limit the display to just those that hit at least 600 homeruns. Highest homerun totals at the top. First and Last names, Homerun total.
+
+```{r}
+query<-"SELECT nameFirst,nameLast,sum(HR)
+FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+GROUP BY Batting.playerID
+HAVING sum(HR)>=600
+ORDER BY sum(HR) DESC"
+
+sqldf(query)
+```
+
+6. List all players with the first nme Bob who averaged more than one million dollars in salary over their career. Include last names.
+
+```{r}
+query<-"SELECT nameFirst,nameLast,avg(salary)
+FROM Salaries INNER JOIN Master
+ON Salaries.playerID=Master.playerID
+WHERE nameFirst='Bob'
+GROUP BY Salaries.playerID
+HAVING avg(salary)>1000000
+ORDER BY avg(salary) DESC"
+
+sqldf(query)
+```
 
